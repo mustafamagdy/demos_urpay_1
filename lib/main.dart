@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,17 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const HomeScreen());
+        home: HomeScreen());
   }
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final cardColors = [
+    Color(0xFF253B88),
+    Color(0xFF4a148c),
+    Color(0xFF004d40),
+  ];
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +76,7 @@ class HomeScreen extends StatelessWidget {
     const middleButtonSize = 70.0;
     final middleButtonPositioned = (size.width / 2) - (middleButtonSize / 2);
     const navBarHeight = 90.0;
+
     return Container(
       color: Colors.transparent,
       height: 120,
@@ -268,167 +275,7 @@ class HomeScreen extends StatelessWidget {
       height: remainingHeight * 0.5,
       child: Column(
         children: [
-          Flexible(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: kDefaultPadding,
-                bottom: kDefaultPadding / 2,
-              ),
-              child: ListView.builder(
-                itemCount: 3,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: screenWidth - (kDefaultPadding),
-                    height: 200,
-                    padding: const EdgeInsets.only(
-                      left: kDefaultPadding / 2,
-                      top: kDefaultPadding / 2,
-                    ),
-                    margin: const EdgeInsets.only(
-                      left: kDefaultPadding / 2,
-                      bottom: kDefaultPadding / 2,
-                    ),
-                    child: Column(
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: kDefaultPadding,
-                              vertical: kDefaultPadding,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF253B88),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Spacer(),
-                                    Icon(
-                                      Icons.ac_unit_rounded,
-                                      size: 40,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Digital Card',
-                                      style: TextStyle(
-                                        color: kOnPrimaryColor.withOpacity(0.8),
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFFFEFF),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                              ),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: const Offset(0, 2),
-                                  blurRadius: 2,
-                                  spreadRadius: 1,
-                                ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: kDefaultPadding / 2,
-                              vertical: kDefaultPadding / 2,
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: kDefaultPadding,
-                                    vertical: kDefaultPadding / 2,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        '....8179',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 19,
-                                          color: kTextColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Show Card Info',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          color: kOrange,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text.rich(
-                                      TextSpan(
-                                          text: 'Status: ',
-                                          style: TextStyle(
-                                              color:
-                                                  kTextColor.withOpacity(0.5)),
-                                          children: const [
-                                            TextSpan(
-                                              text: 'Active',
-                                              style: TextStyle(
-                                                color: Color(0xFF508E37),
-                                              ),
-                                            )
-                                          ]),
-                                    ),
-                                    Image.asset(
-                                      'assets/images/visa.png',
-                                      height: 40,
-                                      width: 80,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+          _cardsCarousel2(screenWidth),
           Flexible(
             flex: 2,
             child: Padding(
@@ -508,9 +355,10 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: kDefaultPadding / 2,
-                      vertical: kDefaultPadding / 2,
+                    padding: const EdgeInsets.only(
+                      left: kDefaultPadding / 2,
+                      right: kDefaultPadding / 2,
+                      top: kDefaultPadding,
                     ),
                     child: Row(
                       children: [
@@ -547,6 +395,192 @@ class HomeScreen extends StatelessWidget {
                         )
                       ],
                     ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Flexible _cardsCarousel2(double screenWidth) {
+    return Flexible(
+      flex: 4,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: kDefaultPadding,
+          bottom: kDefaultPadding / 2,
+        ),
+        child: Swiper(
+          itemBuilder: (BuildContext context, int index) {
+            return _card(screenWidth, index);
+          },
+          itemCount: 3,
+          // curve: Curves.easeInExpo,
+          // pagination: SwiperPagination(),
+          // control: SwiperControl(),
+          scale: 0.9,
+          viewportFraction: 0.9,
+          loop: false,
+        ),
+      ),
+    );
+  }
+
+  Flexible _cardsCarousel(double screenWidth) {
+    return Flexible(
+      flex: 4,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: kDefaultPadding,
+          bottom: kDefaultPadding / 2,
+        ),
+        child: ListView.builder(
+          itemCount: 3,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return _card(screenWidth, index);
+          },
+        ),
+      ),
+    );
+  }
+
+  Container _card(double screenWidth, int index) {
+    return Container(
+      width: screenWidth - (kDefaultPadding),
+      height: 200,
+      padding: const EdgeInsets.only(
+        top: kDefaultPadding / 2,
+      ),
+      margin: const EdgeInsets.only(
+        bottom: kDefaultPadding / 2,
+      ),
+      child: Column(
+        children: [
+          Flexible(
+            flex: 3,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+                vertical: kDefaultPadding,
+              ),
+              decoration: BoxDecoration(
+                color: cardColors[index],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: const [
+                      Spacer(),
+                      Icon(
+                        Icons.ac_unit_rounded,
+                        size: 40,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Text(
+                        'Digital Card',
+                        style: TextStyle(
+                          color: kOnPrimaryColor.withOpacity(0.8),
+                          fontSize: 15,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFFEFF),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, 2),
+                    blurRadius: 2,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding / 2,
+                vertical: kDefaultPadding / 2,
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: kDefaultPadding,
+                      vertical: kDefaultPadding / 2,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          '....8179',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 19,
+                            color: kTextColor,
+                          ),
+                        ),
+                        Text(
+                          'Show Card Info',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: kOrange,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                            text: 'Status: ',
+                            style:
+                                TextStyle(color: kTextColor.withOpacity(0.5)),
+                            children: const [
+                              TextSpan(
+                                text: 'Active',
+                                style: TextStyle(
+                                  color: Color(0xFF508E37),
+                                ),
+                              )
+                            ]),
+                      ),
+                      Image.asset(
+                        'assets/images/visa.png',
+                        height: 40,
+                        width: 80,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
                   )
                 ],
               ),
