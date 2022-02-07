@@ -140,28 +140,29 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               child: Center(
-                child: Wrap(
-                  direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.creditCard,
-                      color: kOnPrimaryColor.withOpacity(0.8),
-                      size: 25,
-                    ),
-                    SizedBox(height: kDefaultPadding / 4),
-                    Text(
-                      'Pay',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 5.0),
+                  child: Wrap(
+                    direction: Axis.vertical,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.creditCard,
                         color: kOnPrimaryColor.withOpacity(0.8),
+                        size: 25,
                       ),
-                    )
-                  ],
+                      const SizedBox(height: kDefaultPadding / 4),
+                      Text(
+                        'Pay',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: kOnPrimaryColor.withOpacity(0.8),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -660,7 +661,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${trx.price > 0 ? '+' : '-'} SAR ${trx.price.toStringAsFixed(2)}',
+                          '${trx.price > 0 ? '+' : '-'} SAR ${(trx.price - trx.price.truncate()) > 0 ? trx.price.toStringAsFixed(2) : trx.price.toStringAsFixed(0)}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,

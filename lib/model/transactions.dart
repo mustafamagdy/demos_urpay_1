@@ -32,13 +32,13 @@ final transactions = [
       title: 'McDonald\'s',
       date: '10/8/2021 10:40 pm',
       image: 'assets/images/brand2.png',
-      price: 120,
+      price: 120.25,
       source: 'Apple Pay'),
   Trx(
       title: 'Starbucks',
       date: '22/8/2021 10:40 pm',
       image: 'assets/images/brand1.png',
-      price: -35,
+      price: -35.30,
       source: 'QR Payment'),
   Trx(
       title: 'Mohamed Ali',
